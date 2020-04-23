@@ -1,0 +1,14 @@
+version: "3"
+services:
+  api:
+    container_name: xnativetrack-api
+    restart: unless-stopped
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    ports:
+      - 3000:3000
