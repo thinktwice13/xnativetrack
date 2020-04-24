@@ -7,6 +7,7 @@ const { dbuser, dbpassword, dbhost, dbport, dbname } = keys;
 
 require("./models/User");
 const authRoutes = require("./routes/authRoutes");
+const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
 
@@ -25,10 +26,9 @@ mongoose.connection.on("error", (error) => {
   console.log({ error });
 });
 
-app.get("/", (req, res) => {
-  res.send("Hi");
+app.get("/", requireAuth, (req, res) => {
+  res.send(`Your email: ${req.user.email}`);
 });
-
 
 const PORT = 3000;
 
