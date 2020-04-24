@@ -1,20 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-
 import keys from "../keys.js";
-const { dbuser, dbpassword, dbhost, dbport, dbname } = keys;
-
-// require("./models/User");
-// import User from "./models/User";
 import User from "./models/User.js";
-import authRoutes from "./routes/authRoutes.js";
+import routes from "./routes/index.js";
 import requireAuth from "./middleware/requireAuth.js";
+console.log({ routes });
 
+const { dbuser, dbpassword, dbhost, dbport, dbname } = keys;
 const app = express();
 
 app.use(bodyParser.json());
-app.use(authRoutes);
 
 const mongoUri = `mongodb://${dbuser}:${dbpassword}@${dbhost}:${dbport}/${dbname}`;
 mongoose.connect(mongoUri, {
@@ -31,6 +27,9 @@ mongoose.connection.on("error", (error) => {
 app.get("/", requireAuth, (req, res) => {
   res.send(`Your email: ${req.user.email}`);
 });
+
+app.post("/signup", routes.auth.signup);
+app.post("/signin", routes.auth.signin);
 
 const PORT = 3000;
 
