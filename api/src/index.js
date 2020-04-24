@@ -4,9 +4,9 @@ const bodyParser = require("body-parser");
 
 const keys = require("../keys.js");
 const { dbuser, dbpassword, dbhost, dbport, dbname } = keys;
-require("./models/User");
 
-const authRoutes = require("./routes/authRoutes.js");
+require("./models/User");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -28,6 +28,7 @@ mongoose.connection.on("error", (error) => {
 app.get("/", (req, res) => {
   res.send("Hi");
 });
+
 
 const PORT = 3000;
 
