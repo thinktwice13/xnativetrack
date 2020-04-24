@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -44,4 +44,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
   });
 };
 
-mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

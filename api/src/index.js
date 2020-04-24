@@ -1,13 +1,15 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
-const keys = require("../keys.js");
+import keys from "../keys.js";
 const { dbuser, dbpassword, dbhost, dbport, dbname } = keys;
 
-require("./models/User");
-const authRoutes = require("./routes/authRoutes");
-const requireAuth = require("./middleware/requireAuth");
+// require("./models/User");
+// import User from "./models/User";
+import User from "./models/User.js";
+import authRoutes from "./routes/authRoutes.js";
+import requireAuth from "./middleware/requireAuth.js";
 
 const app = express();
 

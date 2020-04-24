@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 const User = mongoose.model("User");
-const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -20,4 +20,4 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

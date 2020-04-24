@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   dbuser: process.env.DBUSER,
   dbpassword: process.env.DBPASSWORD,
   dbhost: process.env.DBHOST,
