@@ -13,7 +13,6 @@ export default {
     }
   },
   add: async (req, res) => {
-    console.log(req.body);
 
     const { _id: userId } = req.user;
     const { name, locations } = req.body; // get this from mobile phone
