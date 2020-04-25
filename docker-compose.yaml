@@ -12,3 +12,14 @@ services:
       - ./api:/app
     ports:
       - 3000:3000
+  ngrok:
+    env_file: .env
+    environment:
+      NGROK_REGION: eu
+      TARGET_HOST: $NGROK_TARGET_HOST
+      TARGET_PORT: $NGROK_TARGET_PORT
+    image: gtriggiano/ngrok-tunnel
+    ports:
+      - 4040:4040
+    depends_on:
+      - api
