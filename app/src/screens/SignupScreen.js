@@ -13,6 +13,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 200,
   },
+  error: {
+    fontSize: 16,
+    color: "salmon",
+    fontWeight: "700",
+  },
+  transparent: {
+    color: "rgba(52, 52, 52, 0.8)",
+  },
 });
 
 const SignupScreen = ({ navigation }) => {
@@ -25,24 +33,29 @@ const SignupScreen = ({ navigation }) => {
       <Spacer>
         <Text h4>Sign up for Tracker</Text>
       </Spacer>
-      <Input
-        label="Email"
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-      <Spacer />
-      <Input
-        secureTextEntry
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
       <Spacer>
+        <Input
+          label="Email"
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <Input
+          secureTextEntry
+          label="Password"
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <Text
+          style={state.errorMessage ? styles.errorMessage : styles.transparent}
+        >
+          {state.errorMessage}
+        </Text>
+        <Spacer />
         <Button
           title="Signup"
           onPress={() => {
