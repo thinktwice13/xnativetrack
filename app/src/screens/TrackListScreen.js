@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Button } from "react-native";
 
 const styles = StyleSheet.create({
   h1: {
@@ -7,8 +7,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const TrackListScreen = () => {
-  return <Text style={styles.h1}>TrackList Screen</Text>;
+const TrackListScreen = ({ navigation }) => {
+  return (
+    <>
+      <Text style={styles.h1}>TrackList Screen</Text>
+      <Button
+        title="Go to TrackDetail"
+        onPress={() => navigation.navigate("TrackDetail")}
+      />
+    </>
+  );
 };
 
 export default TrackListScreen;

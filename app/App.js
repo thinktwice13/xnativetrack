@@ -26,12 +26,12 @@ const swicthNavigator = createSwitchNavigator({
     Signin,
   }),
   mainFlow: createBottomTabNavigator({
-    Account,
-    TrackCreate,
     trackListFloe: createStackNavigator({
       TrackList,
       TrackDetail,
     }),
+    Account,
+    TrackCreate,
   }),
 });
 
