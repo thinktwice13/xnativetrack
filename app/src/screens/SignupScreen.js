@@ -1,5 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Text, Button, Input } from "react-native-elements";
+import Spacer from "../components/Spacer";
 
 const styles = StyleSheet.create({
   h1: {
@@ -9,17 +11,17 @@ const styles = StyleSheet.create({
 
 const SignupScreen = ({ navigation }) => {
   return (
-    <View>
-      <Text style={styles.h1}>Signup Screen</Text>
-      <Button
-        title="Go to signin"
-        onPress={() => navigation.navigate("Signin")}
-      />
-      <Button
-        title="Go main flow"
-        onPress={() => navigation.navigate("mainFlow")}
-      />
-    </View>
+    <>
+      <Spacer>
+        <Text h4>Sign up for Tracker</Text>
+      </Spacer>
+      <Input label="Email" />
+      <Spacer />
+      <Input label="Password" />
+      <Spacer>
+        <Button title="Signup" />
+      </Spacer>
+    </>
   );
 };
 
