@@ -19,7 +19,7 @@ export default (reducer, actions, defaultValue) => {
   };
 
   return {
-    COntext,
+    Context,
     Provider,
   };
 };

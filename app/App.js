@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import { Provider as Authprovider } from "./src/context/authContext";
 
 // import screens
 import Screens from "./src/screens";
@@ -40,7 +41,13 @@ const swicthNavigator = createSwitchNavigator({
   }),
 });
 
-export default createAppContainer(swicthNavigator);
+const App = createAppContainer(swicthNavigator);
+
+export default () => (
+  <Authprovider>
+    <App />
+  </Authprovider>
+);
 
 // export default function App() {
 //   return (
