@@ -21,12 +21,17 @@ const instructions = Platform.select({
 });
 
 const swicthNavigator = createSwitchNavigator({
-  loginFlow: createStackNavigator({
-    Signup,
-    Signin,
-  }),
+  loginFlow: createStackNavigator(
+    {
+      Signup,
+      Signin,
+    },
+    {
+      headerMode: "none",
+    }
+  ),
   mainFlow: createBottomTabNavigator({
-    trackListFloe: createStackNavigator({
+    trackListFlow: createStackNavigator({
       TrackList,
       TrackDetail,
     }),
