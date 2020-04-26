@@ -10,7 +10,6 @@ import { setNavigator } from "./src/navigationRef";
 import Screens from "./src/screens";
 const {
   Account,
-  Signup,
   Signin,
   TrackCreate,
   TrackList,
@@ -25,7 +24,6 @@ const instructions = Platform.select({
 const swicthNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator(
     {
-      Signup,
       Signin,
     },
     {

@@ -9,20 +9,20 @@ const authReducer = (state, action) => {
   switch (type) {
     case "add_error":
       return { ...state, errorMessage: payload };
-    case "signup":
+    case "signin":
       return { ...state, token: payload, errorMessage: null };
     default:
       return state;
   }
 };
 
-const signup = (dispatch) => async ({ email, password }, vb) => {
+const signin = (dispatch) => async ({ email, password }, vb) => {
   try {
-    const { data } = await trackerApi.post("/signup", { email, password });
+    const { data } = await trackerApi.post("/signin", { email, password });
     console.log({ data });
     await AsyncStorage.setItem("token", data.token);
     dispatch({
-      type: "signup",
+      type: "signin",
       payload: data.token,
     });
 
@@ -32,15 +32,13 @@ const signup = (dispatch) => async ({ email, password }, vb) => {
 
     dispatch({
       type: "add_error",
-      payload: "Something went wrong with signup",
+      payload: "Something went wrong with signin",
     });
   }
 };
 
-const signin = (dispatch) => async ({ email, password }) => {};
-
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup },
+  { signin },
   { token: null, errorMessage: null }
 );

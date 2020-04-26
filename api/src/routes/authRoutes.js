@@ -4,16 +4,6 @@ const User = mongoose.model("User");
 
 export const signup = async (req, res) => {
   const { email, password } = req.body;
-
-  try {
-    const user = new User({ email, password });
-    await user.save();
-
-    const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
-    res.send({ token });
-  } catch (err) {
-    res.status(422).send(err.message);
-  }
 };
 
 export const signin = async (req, res) => {
@@ -23,8 +13,19 @@ export const signin = async (req, res) => {
     return res.status(422).send({ error: "Must provide email and password" });
 
   const user = await User.findOne({ email });
-  if (!user)
-    return res.status(404).send({ error: "Invalid email or password" });
+
+  // if no user found, try signup
+  if (!user) {
+    try {
+      const user = new User({ email, password });
+      await user.save();
+
+      const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
+      res.send({ token });
+    } catch (err) {
+      res.status(422).send(err.message);
+    }
+  }
 
   try {
     await user.comparePassword(password);
