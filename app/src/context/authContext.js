@@ -16,6 +16,20 @@ const authReducer = (state, action) => {
   }
 };
 
+const tryLocalSignin = (dispatch) => async () => {
+  const token = await AsyncStorage.getItem("token");
+  if (token) {
+    dispatch({ type: "signin", payload: token });
+    navigate("TrackList");
+  } else {
+    navigate("loginFlow");
+  }
+};
+
+const signout = (dispa6ch) => async () => {
+  return () => {};
+};
+
 const signin = (dispatch) => async ({ email, password }, vb) => {
   try {
     const { data } = await trackerApi.post("/signin", { email, password });
@@ -39,6 +53,6 @@ const signin = (dispatch) => async ({ email, password }, vb) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin },
+  { signin, tryLocalSignin, signout },
   { token: null, errorMessage: null }
 );
