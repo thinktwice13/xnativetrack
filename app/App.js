@@ -9,6 +9,7 @@ import { setNavigator } from "./src/navigationRef";
 // import screens
 import Screens from "./src/screens";
 const {
+  ResolveAuth,
   Account,
   Signin,
   TrackCreate,
@@ -22,6 +23,7 @@ const instructions = Platform.select({
 });
 
 const swicthNavigator = createSwitchNavigator({
+  ResolveAuth,
   loginFlow: createStackNavigator(
     {
       Signin,

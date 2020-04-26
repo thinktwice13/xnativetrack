@@ -3,6 +3,7 @@ import Signin from "./SigninScreen";
 import TrackCreate from "./TrackCreateScreen";
 import TrackList from "./TrackListScreen";
 import TrackDetail from "./TrackDetailScreen";
+import ResolveAuth from "./ResolveAuthScreen";
 
 export default {
   Account,
@@ -10,4 +11,5 @@ export default {
   TrackCreate,
   TrackList,
   TrackDetail,
+  ResolveAuth,
 };
