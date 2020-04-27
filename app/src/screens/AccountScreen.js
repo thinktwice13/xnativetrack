@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Button } from "react-native-elements";
-import { AuthContext } from "../context/authContext";
+import { Context as AuthContext } from "../context/authContext";
+import Spacer from "../components/Spacer";
 
 const styles = StyleSheet.create({
   h1: {
@@ -15,7 +16,7 @@ const AccountScreen = () => {
   return (
     <>
       <Text h1>Account Screen</Text>
-      <Button onPress={() => dispatch("signout")} />
+      <Button title="Signout" onPress={signout} />
     </>
   );
 };
