@@ -6,30 +6,37 @@ import {
 } from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default callback => {
+export default (shouldTrack, callback) => {
   const [err, setErr] = useState(null);
-
-  const startWatching = async () => {
-    try {
-      // await requestPermissionAsync();
-      await Permissions.askAsync(Permissions.LOCATION);
-      await watchPositionAsync(
-        {
-          accuracy: Accuracy.BestForNavigation,
-          timeInterval: 1000,
-          distanceInterval: 10,
-        },
-        callback
-      );
-    } catch (error) {
-      console.log({ error });
-      setErr(error);
-    }
-  };
+  const [subscriber, setSubscriber] = useState(null);
 
   useEffect(() => {
-    startWatching();
-  });
+    const startWatching = async () => {
+      try {
+        // await requestPermissionAsync();
+        await Permissions.askAsync(Permissions.LOCATION);
+        const sub = await watchPositionAsync(
+          {
+            accuracy: Accuracy.BestForNavigation,
+            timeInterval: 1000,
+            distanceInterval: 10,
+          },
+          callback
+        );
+
+        setSubscriber(sub);
+      } catch (error) {
+        console.log({ error });
+        setErr(error);
+      }
+    };
+
+    if (shouldTrack) startWatching();
+    else {
+      subscriber.remove();
+      setSubscriber(null);
+    }
+  }, [shouldTrack]);
 
   return [err];
 };

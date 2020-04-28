@@ -15,8 +15,6 @@ const Map = () => {
 
   const { currentLocation } = state;
 
-  console.log({ state });
-
   // let points = [];
   // for (let i = 0; i < 20; ++i) {
   //   points.push({
