@@ -1,15 +1,16 @@
-import "../_mockLocation";
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Button } from "react-native-elements";
-import { SafeAreaView } from "react-navigation";
-import Map from "../components/Map";
+import '../_mockLocation';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text, Button } from 'react-native-elements';
+import { SafeAreaView } from 'react-navigation';
 import {
   // requestPermissionAsync,
   watchPositionAsync,
   Accuracy,
-} from "expo-location";
-import * as Permissions from "expo-permissions";
+} from 'expo-location';
+import * as Permissions from 'expo-permissions';
+import Map from '../components/Map';
+import { Context as LocationConttext } from '../context/locationContext';
 
 const styles = StyleSheet.create({
   h1: {
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
 
 const TrackCreateScreen = () => {
   const [err, setErr] = useState(null);
+  const { addLocation } = useContext(LocationConttext);
 
   const startWatching = async () => {
     try {
@@ -30,8 +32,8 @@ const TrackCreateScreen = () => {
           timeInterval: 1000,
           distanceInterval: 10,
         },
-        (location) => {
-          console.log(location);
+        location => {
+          addLocation(location);
         }
       );
     } catch (error) {
@@ -45,7 +47,7 @@ const TrackCreateScreen = () => {
   });
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView forceInset={{ top: 'always' }}>
       <Text h3>I'm a map</Text>
       <Map />
       {err ? <Text>Please enable location</Text> : null}

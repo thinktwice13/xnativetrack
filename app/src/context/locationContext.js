@@ -4,6 +4,8 @@ import { navigate } from '../navigationRef';
 const locationReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
+    case 'add_current_location':
+      return { ...state, currentLocation: payload };
     default:
       return state;
   }
@@ -11,7 +13,9 @@ const locationReducer = (state, action) => {
 
 const startRecording = dispatch => () => {};
 const stopRecording = dispatch => () => {};
-const addLocation = dispatch => () => {};
+const addLocation = dispatch => location => {
+  dispatch({ type: 'add_current_location', payload: location });
+};
 
 export const { Provider, Context } = createDataContext(
   locationReducer,
