@@ -1,13 +1,15 @@
-import * as React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { Provider as Authprovider } from "./src/context/authContext";
-import { setNavigator } from "./src/navigationRef";
+import * as React from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Provider as Authprovider } from './src/context/authContext';
+import { Provider as LocationProvider } from './src/context/locationContext';
+import { setNavigator } from './src/navigationRef';
 
 // import screens
-import Screens from "./src/screens";
+import Screens from './src/screens';
+
 const {
   ResolveAuth,
   Account,
@@ -29,7 +31,7 @@ const swicthNavigator = createSwitchNavigator({
       Signin,
     },
     {
-      headerMode: "none",
+      headerMode: 'none',
     }
   ),
   mainFlow: createBottomTabNavigator({
@@ -45,13 +47,15 @@ const swicthNavigator = createSwitchNavigator({
 const App = createAppContainer(swicthNavigator);
 
 export default () => (
-  <Authprovider>
-    <App
-      ref={(navigator) => {
-        setNavigator(navigator);
-      }}
-    />
-  </Authprovider>
+  <LocationProvider>
+    <Authprovider>
+      <App
+        ref={navigator => {
+          setNavigator(navigator);
+        }}
+      />
+    </Authprovider>
+  </LocationProvider>
 );
 
 // export default function App() {
@@ -66,22 +70,22 @@ export default () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
-    textAlign: "center",
+    textAlign: 'center',
     margin: 10,
   },
   instructions: {
-    textAlign: "center",
-    color: "#333333",
+    textAlign: 'center',
+    color: '#333333',
     marginBottom: 5,
   },
   titleText: {
     fontSize: 48,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
