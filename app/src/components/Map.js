@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
 import { Text } from 'react-native-elements';
-import MapView, { Polyline } from 'react-native-maps';
+import MapView, { Polyline, Circle } from 'react-native-maps';
 import { Context as LocationContext } from '../context/locationContext';
 
 const styles = StyleSheet.create({
@@ -37,11 +37,17 @@ const Map = () => {
           latitudeDelta: 0.01,
         }}
         region={{
-          ...currentLocation.coordscd ,
+          ...currentLocation.coordscd,
           longitudeDelta: 0.01,
           latitudeDelta: 0.01,
         }}
       >
+        <Circle
+          center={currentLocation.coords}
+          radius={30}
+          strokeColor="rgba(158, 138, 225, 1.0)"
+          fillColor="rgba(158,158, 225, 0.3)"
+        />
         {/* <Polyline coordinates={points} /> */}
       </MapView>
     </>

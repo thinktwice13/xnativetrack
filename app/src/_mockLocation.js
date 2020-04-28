@@ -1,12 +1,12 @@
 import * as Location from 'expo-location';
 
-const tenMetersWithDegrees = 0.0001;
+const movementKm = 0.00001;
 
 const getLocation = increment => ({
   timestamp: 1000000000,
   coords: {
-    latitude: 39.4689865 + increment * tenMetersWithDegrees,
-    longitude: -0.333238 + increment * tenMetersWithDegrees,
+    latitude: 39.4689865 + increment * movementKm,
+    longitude: -0.333238 + increment * movementKm,
     accuracy: 5,
     altitudeAccuracy: 5,
     altitude: 5,
