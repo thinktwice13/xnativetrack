@@ -5,10 +5,11 @@ import { Text, Button } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
 import Map from "../components/Map";
 import {
-  requestPermissionAsync,
+  // requestPermissionAsync,
   watchPositionAsync,
   Accuracy,
 } from "expo-location";
+import * as Permissions from "expo-permissions";
 
 const styles = StyleSheet.create({
   h1: {
@@ -21,7 +22,8 @@ const TrackCreateScreen = () => {
 
   const startWatching = async () => {
     try {
-      await requestPermissionAsync();
+      // await requestPermissionAsync();
+      await Permissions.askAsync(Permissions.LOCATION);
       await watchPositionAsync(
         {
           accuracy: Accuracy.BestForNavigation,
