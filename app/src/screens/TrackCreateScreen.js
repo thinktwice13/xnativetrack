@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
 
 const TrackCreateScreen = ({ isFocused }) => {
   const { state, addLocation } = useContext(LocationConttext);
+  const { recording: isRecording } = state;
   const cb = location => {
-    console.log(`inside ${state.recording}`);
-    addLocation(location, state.recording);
+    console.log(`inside ${isRecording}`);
+    addLocation(location, isRecording);
   };
   // const callback = useCallback(
   //   cb,
@@ -31,9 +32,10 @@ const TrackCreateScreen = ({ isFocused }) => {
   //   [state.recording]
   //   /* eslint-enable */
   // );
-  console.log(`outside ${state.recording}`);
+  console.log(`outside ${isRecording}`);
 
-  const [err] = useLocation(isFocused, state.recording, cb); // Pass the state.recording so that useEffect would rerun on change FIXME is it necessary???? Context should be aware of the state.recorfing
+  const [err] = useLocation(isFocused || isRecording, cb);
+  // First arg cannot be a named variable bc then it referes to the same pos in memory on rerender and stops useEffect in useLocation from rerunning
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
