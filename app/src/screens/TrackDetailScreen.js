@@ -1,6 +1,6 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Button } from "react-native-elements";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   h1: {
@@ -8,8 +8,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const TrackDetailScreen = () => {
-  return <Text h1>TrackDetail Screen</Text>;
-};
+const TrackDetailScreen = () => <Text h1>TrackDetail Screen</Text>;
 
 export default TrackDetailScreen;

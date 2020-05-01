@@ -6,7 +6,7 @@ import {
 } from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default (shouldTrack, callback) => {
+export default (shouldTrack, isRecording, callback) => {
   const [err, setErr] = useState(null);
   const [subscriber, setSubscriber] = useState(null);
 
@@ -36,7 +36,9 @@ export default (shouldTrack, callback) => {
       subscriber.remove();
       setSubscriber(null);
     }
-  }, [shouldTrack]);
+  /*eslint-disable */
+  }, [shouldTrack, isRecording]);
+  /*eslint-disable */
 
   return [err];
 };

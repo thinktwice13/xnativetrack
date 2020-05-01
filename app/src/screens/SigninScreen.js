@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Button, Input } from "react-native-elements";
-import Spacer from "../components/Spacer";
-import { Context as AuthContext } from "../context/authContext";
+import React, { useState, useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text, Button, Input } from 'react-native-elements';
+import Spacer from '../components/Spacer';
+import { Context as AuthContext } from '../context/authContext';
 
 const styles = StyleSheet.create({
   h1: {
@@ -10,23 +10,23 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     marginBottom: 200,
   },
   error: {
     fontSize: 16,
-    color: "salmon",
-    fontWeight: "700",
+    color: 'salmon',
+    fontWeight: '700',
   },
   transparent: {
-    color: "rgba(52, 52, 52, 0.8)",
+    color: 'rgba(52, 52, 52, 0.8)',
   },
 });
 
-const SigninScreen = ({ navigation }) => {
+const SigninScreen = () => {
   const { state, signin } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <View style={styles.container}>

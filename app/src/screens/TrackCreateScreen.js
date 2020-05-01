@@ -1,5 +1,5 @@
 import '../_mockLocation';
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -11,6 +11,7 @@ import {
 import useLocation from '../hooks/useLocation';
 import Map from '../components/Map';
 import { Context as LocationConttext } from '../context/locationContext';
+import TrackForm from '../components/TrackForm';
 
 const styles = StyleSheet.create({
   h1: {
@@ -19,8 +20,20 @@ const styles = StyleSheet.create({
 });
 
 const TrackCreateScreen = ({ isFocused }) => {
-  const { addLocation } = useContext(LocationConttext);
-  const [err] = useLocation(isFocused, addLocation);
+  const { state, addLocation } = useContext(LocationConttext);
+  const cb = location => {
+    console.log(`inside ${state.recording}`);
+    addLocation(location, state.recording);
+  };
+  // const callback = useCallback(
+  //   cb,
+  //   /* eslint-disable */
+  //   [state.recording]
+  //   /* eslint-enable */
+  // );
+  console.log(`outside ${state.recording}`);
+
+  const [err] = useLocation(isFocused, state.recording, cb); // Pass the state.recording so that useEffect would rerun on change FIXME is it necessary???? Context should be aware of the state.recorfing
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
@@ -32,6 +45,7 @@ const TrackCreateScreen = ({ isFocused }) => {
         }}
       /> */}
       {err ? <Text>Please enable location</Text> : null}
+      <TrackForm />
     </SafeAreaView>
   );
 };
