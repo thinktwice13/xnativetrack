@@ -6,7 +6,7 @@ import {
 } from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default (shouldTrack, callback) => {
+export default (shouldTrack, isRecording, callback) => {
   const [err, setErr] = useState(null);
   const [subscriber, setSubscriber] = useState(null);
 
@@ -32,12 +32,19 @@ export default (shouldTrack, callback) => {
     };
 
     if (shouldTrack) startWatching();
-    else {
+    else if (subscriber) {
       subscriber.remove();
       setSubscriber(null);
     }
-  /*eslint-disable */
-  }, [shouldTrack]);
+
+    // return a cleanup function for use just before the next time we start watching for location again
+    // return () => {
+    //   if (subscriber) {
+    //     subscriber.remove();
+    //   }
+    // };
+    /*eslint-disable */
+  }, [shouldTrack, isRecording]);
   /*eslint-disable */
 
   return [err];

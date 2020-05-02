@@ -3,9 +3,10 @@ services:
   api:
     container_name: xnativetrack-api
     restart: unless-stopped
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    # build:
+      # context: ./api
+      # dockerfile: Dockerfile
+    image: thinktwice13/xnative-track_api
     env_file: .env
     volumes:
       - /app/node_modules

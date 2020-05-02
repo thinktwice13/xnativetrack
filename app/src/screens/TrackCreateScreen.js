@@ -22,19 +22,14 @@ const styles = StyleSheet.create({
 const TrackCreateScreen = ({ isFocused }) => {
   const { state, addLocation } = useContext(LocationConttext);
   const { recording: isRecording } = state;
-  const cb = location => {
-    console.log(`inside ${isRecording}`);
-    addLocation(location, isRecording);
-  };
-  // const callback = useCallback(
-  //   cb,
-  //   /* eslint-disable */
-  //   [state.recording]
-  //   /* eslint-enable */
-  // );
   console.log(`outside ${isRecording}`);
 
-  const [err] = useLocation(isFocused || isRecording, cb);
+  const [err] = useLocation(isFocused, isRecording, location => {
+    console.log(`inside ${state.recording}`);
+
+    addLocation(location, isRecording);
+  });
+
   // First arg cannot be a named variable bc then it referes to the same pos in memory on rerender and stops useEffect in useLocation from rerunning
 
   return (
