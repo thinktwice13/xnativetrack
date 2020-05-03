@@ -21,7 +21,11 @@ const TrackListScreen = ({ navigation }) => {
         data={state}
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('TrackDetail', { _id: item._id });
+            }}
+          >
             <ListItem chevron title={item.name} />
           </TouchableOpacity>
         )}
