@@ -1,4 +1,5 @@
 import createDataContext from './createDataContext';
+import trackerApi from '../services/tracker';
 
 const trackReducer = (state, action) => {
   const { type, payload } = action;
