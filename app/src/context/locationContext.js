@@ -1,10 +1,9 @@
 import createDataContext from './createDataContext';
-import { navigate } from '../navigationRef';
 
 const locationReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case 'add_current_location':
+    case 'set_current_location':
       return { ...state, currentLocation: payload };
     case 'start_recording':
       return { ...state, recording: true };
@@ -30,7 +29,7 @@ const stopRecording = dispatch => () => {
   dispatch({ type: 'stop_recording' });
 };
 const addLocation = dispatch => (location, recording) => {
-  dispatch({ type: 'add_current_location', payload: location });
+  dispatch({ type: 'set_current_location', payload: location });
   if (recording) {
     dispatch({ type: 'add_location', payload: location });
   }

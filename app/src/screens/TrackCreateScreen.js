@@ -1,7 +1,7 @@
 import '../_mockLocation';
-import React, { useContext, useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {
   SafeAreaView,
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
 
 const TrackCreateScreen = ({ isFocused }) => {
   const { state, addLocation } = useContext(LocationConttext);
-  const { recording: isRecording } = state;
+  const { recording: isRecording, locations } = state;
   console.log(`outside ${isRecording}`);
 
   const [err] = useLocation(isFocused, isRecording, location => {
-    console.log(`inside ${state.recording}`);
-
+    console.log(`inside ${isRecording}`);
     addLocation(location, isRecording);
   });
+  console.log(locations.length);
 
   // First arg cannot be a named variable bc then it referes to the same pos in memory on rerender and stops useEffect in useLocation from rerunning
 

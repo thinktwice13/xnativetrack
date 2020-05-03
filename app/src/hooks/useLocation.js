@@ -6,46 +6,58 @@ import {
 } from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default (shouldTrack, isRecording, callback) => {
+export default (isFocused, isRecording, callback) => {
   const [err, setErr] = useState(null);
-  const [subscriber, setSubscriber] = useState(null);
+  // const [subscriber, setSubscriber] = useState(null); // Moved to useEffect because it is not used anywhere else
 
   useEffect(() => {
+    let subscriber;
+    const shouldTrack = isFocused || isRecording;
+
+    /**
+     * sets subscriber
+     */
     const startWatching = async () => {
       try {
         // await requestPermissionAsync();
         await Permissions.askAsync(Permissions.LOCATION);
-        const sub = await watchPositionAsync(
+        subscriber = await watchPositionAsync(
           {
             accuracy: Accuracy.BestForNavigation,
-            timeInterval: 1000,
+            timeInterval: 5000,
             distanceInterval: 10,
           },
           callback
         );
 
-        setSubscriber(sub);
+        // setSubscriber(sub);
       } catch (error) {
         console.log({ error });
         setErr(error);
       }
     };
 
-    if (shouldTrack) startWatching();
-    else if (subscriber) {
-      subscriber.remove();
-      setSubscriber(null);
+    if (shouldTrack) {
+      if (!subscriber) {
+        startWatching();
+        console.log(`Started watching`);
+      }
+    } else {
+      if (subscriber) {
+        subscriber.remove();
+      }
+      subscriber = null;
     }
 
     // return a cleanup function for use just before the next time we start watching for location again
-    // return () => {
-    //   if (subscriber) {
-    //     subscriber.remove();
-    //   }
-    // };
-    /*eslint-disable */
-  }, [shouldTrack, isRecording]);
-  /*eslint-disable */
+    return () => {
+      if (subscriber) {
+        subscriber.remove();
+      }
+    };
+    /* eslint-disable */
+  }, [isFocused, isRecording]);
+  /* eslint-enable */
 
   return [err];
 };
