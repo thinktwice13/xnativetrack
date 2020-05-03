@@ -32,7 +32,7 @@ app.get("/tracks", requireAuth, routes.tracks.getAll);
 
 app.post("/signup", routes.auth.signup);
 app.post("/signin", routes.auth.signin);
-app.post("/tracks/new", requireAuth, routes.tracks.add);
+app.post("/tracks", requireAuth, routes.tracks.add);
 
 const PORT = 3000;
 
