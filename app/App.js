@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Provider as Authprovider } from './src/context/authContext';
 import { Provider as LocationProvider } from './src/context/locationContext';
 import { setNavigator } from './src/navigationRef';
-import { Provider as TrackProivder } from './src/context/TrackCotext';
+import { Provider as TrackProvider } from './src/context/trackContext';
 
 // import screens
 import Screens from './src/screens';
@@ -48,7 +48,7 @@ const swicthNavigator = createSwitchNavigator({
 const App = createAppContainer(swicthNavigator);
 
 export default () => (
-  <TrackProivder>
+  <TrackProvider>
     <LocationProvider>
       <Authprovider>
         <App
@@ -58,7 +58,7 @@ export default () => (
         />
       </Authprovider>
     </LocationProvider>
-  </TrackProivder>
+  </TrackProvider>
 );
 
 // export default function App() {

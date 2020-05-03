@@ -22,10 +22,8 @@ const styles = StyleSheet.create({
 const TrackCreateScreen = ({ isFocused }) => {
   const { state, addLocation } = useContext(LocationConttext);
   const { recording: isRecording, locations } = state;
-  console.log(`outside ${isRecording}`);
 
   const [err] = useLocation(isFocused, isRecording, location => {
-    console.log(`inside ${isRecording}`);
     addLocation(location, isRecording);
   });
   console.log(locations.length);
