@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Provider as Authprovider } from './src/context/authContext';
 import { Provider as LocationProvider } from './src/context/locationContext';
 import { setNavigator } from './src/navigationRef';
+import { Provider as TrackProivder } from './src/context/TrackCotext';
 
 // import screens
 import Screens from './src/screens';
@@ -47,15 +48,17 @@ const swicthNavigator = createSwitchNavigator({
 const App = createAppContainer(swicthNavigator);
 
 export default () => (
-  <LocationProvider>
-    <Authprovider>
-      <App
-        ref={navigator => {
-          setNavigator(navigator);
-        }}
-      />
-    </Authprovider>
-  </LocationProvider>
+  <TrackProivder>
+    <LocationProvider>
+      <Authprovider>
+        <App
+          ref={navigator => {
+            setNavigator(navigator);
+          }}
+        />
+      </Authprovider>
+    </LocationProvider>
+  </TrackProivder>
 );
 
 // export default function App() {

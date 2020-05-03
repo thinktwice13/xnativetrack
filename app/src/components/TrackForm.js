@@ -5,7 +5,7 @@ import { Context as LocationContext } from '../context/locationContext';
 
 const TrackForm = () => {
   const {
-    state: { name, recording },
+    state: { name, recording, locations },
     startRecording,
     stopRecording,
     changeName,
@@ -20,15 +20,24 @@ const TrackForm = () => {
           value={name}
         />
       </Spacer>
-      {!recording ? (
-        <Button title="Start Recording" onPress={startRecording} />
-      ) : (
+      <Spacer>
+        {!recording ? (
+          <Button title="Start Recording" onPress={startRecording} />
+        ) : (
+          <Button
+            buttonStyle={{ backgroundColor: 'salmon' }}
+            title="Stop Recording"
+            onPress={stopRecording}
+          />
+        )}
+      </Spacer>
+      <Spacer>
         <Button
-          buttonStyle={{ backgroundColor: 'salmon' }}
-          title="Stop Recording"
-          onPress={stopRecording}
+          title="Save Track"
+          onPress={() => {}}
+          disabled={recording || !locations.length}
         />
-      )}
+      </Spacer>
     </>
   );
 };

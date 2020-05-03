@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
 });
 
 const Map = () => {
-  const { state } = useContext(LocationContext);
-
-  const { currentLocation } = state;
+  const {
+    state: { currentLocation, locations },
+  } = useContext(LocationContext);
 
   // let points = [];
   // for (let i = 0; i < 20; ++i) {
@@ -46,7 +46,7 @@ const Map = () => {
           strokeColor="rgba(158, 138, 225, 1.0)"
           fillColor="rgba(158,158, 225, 0.3)"
         />
-        {/* <Polyline coordinates={points} /> */}
+        <Polyline coordinates={locations.map(loc => loc.coords)} />
       </MapView>
     </>
   );
